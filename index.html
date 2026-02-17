@@ -2,79 +2,574 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Apple Social Prompt Studio</title>
-
-  <!-- Tailwind CDN -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advice Atara Mall — Apple Prompt Generator (Prototype)</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="./style.css" />
 </head>
+
 <body class="bg-slate-50 text-slate-900">
-  <div class="app-container">
+  <!-- App Shell (max 512px) -->
+  <div class="mx-auto max-w-[512px] min-h-screen p-4">
     <!-- Header -->
-    <header class="sticky top-0 z-20 bg-slate-50/90 backdrop-blur border-b border-slate-200">
-      <div class="px-4 py-4 flex items-center justify-between">
+    <header class="sticky top-0 z-10 bg-slate-50/90 backdrop-blur border-b border-slate-200 -mx-4 px-4 py-3">
+      <div class="flex items-center justify-between gap-3">
         <div class="flex items-center gap-3">
-          <div class="h-10 w-10 rounded-2xl bg-slate-900 text-white grid place-items-center font-semibold">A</div>
+          <div class="h-10 w-10 rounded-xl bg-slate-900 text-white grid place-items-center font-bold">A</div>
           <div>
-            <div class="text-base font-semibold leading-tight">Apple Social Prompt Studio</div>
-            <div class="text-xs text-slate-600">Prompt CMS สำหรับพนักงานขาย Apple</div>
+            <div class="font-semibold leading-tight">Apple Prompt Generator</div>
+            <div class="text-xs text-slate-500 leading-tight">Advice อาทาระมอลล์ ศรีราชา (Internal)</div>
           </div>
         </div>
-        <button id="btnAbout" class="text-sm px-3 py-2 rounded-xl bg-white border border-slate-200 active:scale-[0.99]">
-          About
-        </button>
-      </div>
-
-      <!-- Search -->
-      <div class="px-4 pb-4">
-        <label class="sr-only" for="searchInput">ค้นหา</label>
-        <div class="flex gap-2">
-          <input id="searchInput" type="search" placeholder="ค้นหาเทมเพลต เช่น ผ่อน 0%, วาเลนไทน์, iPhone…"
-                 class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-slate-300" />
-          <button id="btnClearSearch"
-                  class="px-4 py-3 rounded-2xl bg-white border border-slate-200 text-sm active:scale-[0.99]">
-            ล้าง
-          </button>
+        <div class="text-right">
+          <div class="text-xs text-slate-500">โควต้า วันนี้</div>
+          <div class="font-semibold"><span id="quotaLeft">30</span>/30</div>
         </div>
       </div>
     </header>
 
-    <!-- Main -->
-    <main class="px-4 py-4 pb-24" id="appRoot">
-      <!-- Filled by app.js -->
-      <div class="text-sm text-slate-600">กำลังโหลด…</div>
-    </main>
+    <!-- Tabs / Steps -->
+    <nav class="mt-4">
+      <div class="grid grid-cols-3 gap-2 text-xs">
+        <button id="tab1" class="stepBtn rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold">1) Template</button>
+        <button id="tab2" class="stepBtn rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold">2) แก้ไข</button>
+        <button id="tab3" class="stepBtn rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold">3) Prompt</button>
+      </div>
+    </nav>
 
-    <!-- Sticky Bottom Bar -->
-    <footer class="fixed bottom-0 left-0 right-0 z-30">
-      <div class="mx-auto max-w-[512px] px-4 pb-4">
-        <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-3 flex items-center gap-3">
-          <button id="btnQuickGenerate"
-                  class="flex-1 rounded-2xl bg-slate-900 text-white py-3 text-sm font-semibold active:scale-[0.99]">
-            ⚡ Quick Generate
-          </button>
-          <button id="btnCopy"
-                  class="w-28 rounded-2xl bg-white border border-slate-200 py-3 text-sm font-semibold active:scale-[0.99]">
-            Copy
-          </button>
+    <!-- SCREEN 1: Template Gallery -->
+    <section id="screen1" class="mt-4">
+      <div class="flex items-end justify-between">
+        <div>
+          <h2 class="text-lg font-semibold">เลือก Template</h2>
+          <p class="text-sm text-slate-600">แตะ 1 แบบ แล้วไปหน้าแก้ไข</p>
         </div>
-        <div id="toast" class="hidden mt-2 text-center text-xs text-white bg-slate-900 rounded-xl py-2">
-          คัดลอกแล้ว ✅
+        <button id="resetBtn" class="text-xs px-3 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-100">รีเซ็ต</button>
+      </div>
+
+      <div class="mt-4 grid grid-cols-2 gap-3">
+        <!-- Cards -->
+        <button class="tplCard group rounded-2xl border border-slate-200 bg-white p-3 text-left hover:shadow-sm" data-template="studio">
+          <div class="aspect-[4/3] rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 grid place-items-center">
+            <span class="text-xs text-slate-600">Studio</span>
+          </div>
+          <div class="mt-3 font-semibold">Studio Product Shot</div>
+          <div class="text-xs text-slate-500">พื้นหลังมินิมอล + แสงสตูดิโอ</div>
+        </button>
+
+        <button class="tplCard group rounded-2xl border border-slate-200 bg-white p-3 text-left hover:shadow-sm" data-template="lifestyle">
+          <div class="aspect-[4/3] rounded-xl bg-gradient-to-br from-amber-50 to-slate-200 grid place-items-center">
+            <span class="text-xs text-slate-600">Lifestyle</span>
+          </div>
+          <div class="mt-3 font-semibold">Lifestyle Desk/Café</div>
+          <div class="text-xs text-slate-500">ฉากใช้งานจริง ดูเข้าถึงง่าย</div>
+        </button>
+
+        <button class="tplCard group rounded-2xl border border-slate-200 bg-white p-3 text-left hover:shadow-sm" data-template="macro">
+          <div class="aspect-[4/3] rounded-xl bg-gradient-to-br from-slate-100 to-indigo-100 grid place-items-center">
+            <span class="text-xs text-slate-600">Macro</span>
+          </div>
+          <div class="mt-3 font-semibold">Feature Macro</div>
+          <div class="text-xs text-slate-500">โฟกัสดีเทล (ชิป/กล้อง/จอ)</div>
+        </button>
+
+        <button class="tplCard group rounded-2xl border border-slate-200 bg-white p-3 text-left hover:shadow-sm" data-template="pricetag">
+          <div class="aspect-[4/3] rounded-xl bg-gradient-to-br from-rose-50 to-slate-200 grid place-items-center">
+            <span class="text-xs text-slate-600">Price</span>
+          </div>
+          <div class="mt-3 font-semibold">Promo Price Tag</div>
+          <div class="text-xs text-slate-500">ใส่ราคา/โปรผ่อน (ธีมร้าน)</div>
+        </button>
+      </div>
+
+      <div class="mt-4 rounded-2xl border border-slate-200 bg-white p-4">
+        <div class="text-sm">
+          <span class="font-semibold">Template ที่เลือก:</span>
+          <span id="selectedTemplateLabel" class="ml-2 text-slate-600">ยังไม่ได้เลือก</span>
+        </div>
+        <button id="goEditorBtn" class="mt-3 w-full rounded-2xl bg-slate-900 px-4 py-3 font-semibold text-white hover:bg-slate-800">
+          ไปหน้าแก้ไข
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: Editor -->
+    <section id="screen2" class="mt-4 hidden">
+      <h2 class="text-lg font-semibold">แก้ไขข้อมูล</h2>
+      <p class="text-sm text-slate-600">เลือกสินค้า + สี + ฟอร์แมต + โปร แล้วกดสร้าง Prompt</p>
+
+      <!-- Product selector -->
+      <div class="mt-4 rounded-2xl border border-slate-200 bg-white p-4">
+        <div class="text-sm font-semibold">Smart Product Selector</div>
+
+        <label class="mt-3 block text-xs text-slate-500">ค้นหาสินค้า</label>
+        <input id="productSearch" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-300" placeholder="พิมพ์เช่น iPhone / MacBook / Watch..." />
+
+        <label class="mt-3 block text-xs text-slate-500">เลือกสินค้า</label>
+        <select id="productSelect" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-300"></select>
+
+        <div class="mt-3 grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-slate-500">สี</label>
+            <select id="colorSelect" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-300"></select>
+          </div>
+          <div>
+            <label class="block text-xs text-slate-500">ความจุ/รุ่น</label>
+            <select id="variantSelect" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-300"></select>
+          </div>
         </div>
       </div>
-    </footer>
 
-    <!-- Hidden textarea fallback -->
-    <textarea id="clipboardProxy" class="sr-only" aria-hidden="true"></textarea>
+      <!-- Tone + Format -->
+      <div class="mt-3 rounded-2xl border border-slate-200 bg-white p-4">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-slate-500">Tone/Style</label>
+            <select id="toneSelect" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-300">
+              <option value="professional">Professional</option>
+              <option value="casual">Casual</option>
+              <option value="luxury">Luxury</option>
+              <option value="trendy">Trendy</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs text-slate-500">Social Format</label>
+            <select id="socialSelect" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-300">
+              <option value="facebook">Facebook Post</option>
+              <option value="instagram">Instagram</option>
+              <option value="tiktok">TikTok</option>
+              <option value="linkedin">LinkedIn</option>
+            </select>
+          </div>
+        </div>
+
+        <label class="mt-3 block text-xs text-slate-500">ขนาดภาพ</label>
+        <div class="mt-2 grid grid-cols-4 gap-2">
+          <button class="ratioBtn rounded-xl border border-slate-200 bg-white px-2 py-2 text-xs font-semibold" data-ratio="1:1">1:1</button>
+          <button class="ratioBtn rounded-xl border border-slate-200 bg-white px-2 py-2 text-xs font-semibold" data-ratio="4:5">4:5</button>
+          <button class="ratioBtn rounded-xl border border-slate-200 bg-white px-2 py-2 text-xs font-semibold" data-ratio="9:16">9:16</button>
+          <button class="ratioBtn rounded-xl border border-slate-200 bg-white px-2 py-2 text-xs font-semibold" data-ratio="16:9">16:9</button>
+        </div>
+      </div>
+
+      <!-- Promo block -->
+      <div class="mt-3 rounded-2xl border border-slate-200 bg-white p-4">
+        <div class="flex items-center justify-between">
+          <div class="text-sm font-semibold">Promo Block</div>
+          <div class="text-xs text-slate-500">เลือกได้หลายข้อ</div>
+        </div>
+
+        <div class="mt-3 grid gap-2">
+          <label class="flex items-center gap-2 text-sm">
+            <input type="checkbox" class="promoChk h-4 w-4" value="ผ่อน 0% นาน 36 เดือน" />
+            ผ่อน 0% นาน 36 เดือน
+          </label>
+          <label class="flex items-center gap-2 text-sm">
+            <input type="checkbox" class="promoChk h-4 w-4" value="Pay Next Extra / SPayLater (ไม่ใช้บัตร)" />
+            Pay Next Extra / SPayLater (ไม่ใช้บัตร)
+          </label>
+          <label class="flex items-center gap-2 text-sm">
+            <input type="checkbox" class="promoChk h-4 w-4" value="รับสิทธิ์/คะแนน Advice Plus+ (ตามเงื่อนไข)" />
+            รับสิทธิ์/คะแนน Advice Plus+ (ตามเงื่อนไข)
+          </label>
+          <label class="flex items-center gap-2 text-sm">
+            <input type="checkbox" class="promoChk h-4 w-4" value="ของแถม/ฟิล์ม (ระบุในโพสต์)" />
+            ของแถม/ฟิล์ม (ระบุในโพสต์)
+          </label>
+        </div>
+
+        <label class="mt-3 block text-xs text-slate-500">ราคา (ถ้ามี)</label>
+        <input id="priceInput" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-300" placeholder="เช่น 29,990" />
+
+        <button id="buildPromptBtn" class="mt-4 w-full rounded-2xl bg-slate-900 px-4 py-3 font-semibold text-white hover:bg-slate-800">
+          สร้าง Prompt
+        </button>
+      </div>
+
+      <div class="mt-3 grid grid-cols-2 gap-2">
+        <button id="backToTemplatesBtn" class="rounded-2xl border border-slate-200 bg-white px-4 py-3 font-semibold hover:bg-slate-100">
+          ย้อนกลับ
+        </button>
+        <button id="goOutputBtn" class="rounded-2xl bg-slate-900 px-4 py-3 font-semibold text-white hover:bg-slate-800">
+          ไปหน้า Prompt
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: Output -->
+    <section id="screen3" class="mt-4 hidden">
+      <h2 class="text-lg font-semibold">Prompt พร้อมใช้งาน</h2>
+      <p class="text-sm text-slate-600">กดคัดลอก หรือใช้โควต้าฟรี (จำลอง) เพื่อ “ล็อก/นับโควต้า”</p>
+
+      <!-- Prompt Preview -->
+      <div class="mt-4 rounded-2xl border border-slate-200 bg-white p-4">
+        <div class="flex items-center justify-between">
+          <div class="text-sm font-semibold">Prompt Preview</div>
+          <span id="copiedToast" class="hidden text-xs rounded-full bg-emerald-100 px-2 py-1 font-semibold text-emerald-700">Copied!</span>
+        </div>
+
+        <pre id="promptBox" class="mt-3 whitespace-pre-wrap rounded-xl bg-slate-900 p-3 text-xs text-slate-50 leading-relaxed"></pre>
+
+        <div class="mt-3 grid grid-cols-2 gap-2">
+          <button id="copyBtn" class="rounded-2xl border border-slate-200 bg-white px-4 py-3 font-semibold hover:bg-slate-100">
+            คัดลอก Prompt
+          </button>
+          <button id="useQuotaBtn" class="rounded-2xl bg-slate-900 px-4 py-3 font-semibold text-white hover:bg-slate-800">
+            ใช้โควต้าฟรี
+          </button>
+        </div>
+
+        <div id="quotaWarn" class="mt-3 hidden rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-700">
+          วันนี้คุณใช้ครบโควต้าแล้ว (30/30) — ระบบล็อกการใช้งาน
+        </div>
+
+        <div class="mt-3 text-xs text-slate-500">
+          Brand Lock: <span class="font-semibold">Advice อาทาระมอลล์ ศรีราชา</span>
+        </div>
+      </div>
+
+      <!-- Fake image preview placeholder -->
+      <div class="mt-3 rounded-2xl border border-slate-200 bg-white p-4">
+        <div class="text-sm font-semibold">Preview (ตัวอย่าง)</div>
+        <div class="mt-3 aspect-[4/3] rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 grid place-items-center text-xs text-slate-600">
+          (จุดนี้เชื่อม Gemini/Nano Banana ทีหลัง)
+        </div>
+      </div>
+
+      <div class="mt-3 grid grid-cols-2 gap-2">
+        <button id="backToEditorBtn" class="rounded-2xl border border-slate-200 bg-white px-4 py-3 font-semibold hover:bg-slate-100">
+          กลับไปแก้ไข
+        </button>
+        <button id="newPromptBtn" class="rounded-2xl bg-slate-900 px-4 py-3 font-semibold text-white hover:bg-slate-800">
+          สร้างใหม่
+        </button>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-8 pb-8 text-center text-xs text-slate-500">
+      Internal Prototype • Advice อาทาระมอลล์ ศรีราชา
+    </footer>
   </div>
 
-  <script src="./app.js"></script>
+<script>
+  // -----------------------------
+  // Demo Data (ปรับได้ทีหลัง)
+  // -----------------------------
+  const PRODUCTS = [
+    {
+      id: "iphone16",
+      name: "Apple iPhone 16",
+      colors: ["Titanium", "Black", "White", "Blue"],
+      variants: ["128GB", "256GB", "512GB"],
+      features: ["A-series chip", "Advanced camera", "Bright display"]
+    },
+    {
+      id: "macbookairm4",
+      name: "Apple MacBook Air (M4)",
+      colors: ["Starlight", "Midnight", "Silver", "Space Gray"],
+      variants: ["16GB/256GB", "16GB/512GB"],
+      features: ["M4 chip", "Thin & light", "All-day battery"]
+    },
+    {
+      id: "macbookprom",
+      name: "Apple MacBook Pro",
+      colors: ["Space Black", "Silver"],
+      variants: ["14-inch", "16-inch"],
+      features: ["Pro chip", "XDR display", "Pro performance"]
+    },
+    {
+      id: "watchultra2",
+      name: "Apple Watch Ultra 2",
+      colors: ["Black Titanium", "Natural Titanium"],
+      variants: ["49mm GPS + Cellular"],
+      features: ["Rugged design", "Bright display", "Advanced health"]
+    },
+    {
+      id: "airpodspro",
+      name: "Apple AirPods Pro",
+      colors: ["White"],
+      variants: ["USB-C Case"],
+      features: ["ANC", "Transparency", "Spatial Audio"]
+    }
+  ];
+
+  const TEMPLATES = {
+    studio: { label: "Studio Product Shot", mood: "clean minimal studio", lighting: "soft diffused studio lighting" },
+    lifestyle: { label: "Lifestyle Desk/Café", mood: "approachable lifestyle", lighting: "natural daylight from side window" },
+    macro: { label: "Feature Macro", mood: "premium macro detail", lighting: "controlled highlight lighting" },
+    pricetag: { label: "Promo Price Tag", mood: "clean retail promo", lighting: "bright commercial lighting" }
+  };
+
+  // -----------------------------
+  // State
+  // -----------------------------
+  let state = {
+    step: 1,
+    selectedTemplate: null,
+    selectedProductId: PRODUCTS[0].id,
+    selectedColor: PRODUCTS[0].colors[0],
+    selectedVariant: PRODUCTS[0].variants[0],
+    tone: "professional",
+    social: "facebook",
+    ratio: "1:1",
+    promos: [],
+    price: "",
+    promptText: ""
+  };
+
+  // Quota demo (localStorage)
+  const QUOTA_MAX = 30;
+  const todayKey = new Date().toISOString().slice(0,10);
+  const quotaStorageKey = "advice_prompt_quota_" + todayKey;
+  let usedQuota = Number(localStorage.getItem(quotaStorageKey) || "0");
+
+  // -----------------------------
+  // Helpers
+  // -----------------------------
+  const $ = (id) => document.getElementById(id);
+
+  function setStep(n) {
+    state.step = n;
+    $("screen1").classList.toggle("hidden", n !== 1);
+    $("screen2").classList.toggle("hidden", n !== 2);
+    $("screen3").classList.toggle("hidden", n !== 3);
+
+    // Highlight active tab
+    ["tab1","tab2","tab3"].forEach((t, idx) => {
+      const active = (idx+1) === n;
+      $(t).classList.toggle("bg-slate-900", active);
+      $(t).classList.toggle("text-white", active);
+      $(t).classList.toggle("border-slate-900", active);
+    });
+  }
+
+  function updateQuotaUI() {
+    const left = Math.max(0, QUOTA_MAX - usedQuota);
+    $("quotaLeft").textContent = left;
+    $("quotaWarn").classList.toggle("hidden", left > 0);
+    $("useQuotaBtn").disabled = left <= 0;
+    $("useQuotaBtn").classList.toggle("opacity-50", left <= 0);
+    $("useQuotaBtn").classList.toggle("cursor-not-allowed", left <= 0);
+  }
+
+  function normalizeAppleName(name) {
+    // Simple guard: ensure starts with "Apple "
+    if (!name.trim().toLowerCase().startsWith("apple ")) {
+      return "Apple " + name.trim();
+    }
+    return name.trim();
+  }
+
+  function buildPrompt() {
+    const tpl = state.selectedTemplate ? TEMPLATES[state.selectedTemplate] : null;
+    const product = PRODUCTS.find(p => p.id === state.selectedProductId);
+
+    const productName = normalizeAppleName(product.name);
+    const toneMap = {
+      professional: "professional, clean, commercial",
+      casual: "friendly, approachable, everyday",
+      luxury: "luxury, premium, high-end",
+      trendy: "trendy, bold, modern social"
+    };
+
+    const socialMap = {
+      facebook: "optimized for Facebook post, clear readable composition",
+      instagram: "optimized for Instagram feed, stylish minimal aesthetics",
+      tiktok: "optimized for TikTok/Reels cover, safe text zones, high contrast focal point",
+      linkedin: "optimized for LinkedIn, professional tech editorial feel"
+    };
+
+    const promoLine = state.promos.length
+      ? `Promo details (overlay-ready): ${state.promos.join(" • ")}.`
+      : `No promo overlay.`;
+
+    const priceLine = state.price.trim()
+      ? `Include price overlay: ${state.price.trim()} THB (with clean retail tag style).`
+      : `No price overlay.`;
+
+    const templateLine = tpl
+      ? `Template mood: ${tpl.mood}. Lighting: ${tpl.lighting}.`
+      : `Template mood: clean minimal. Lighting: soft studio.`;
+
+    // Brand lock footer instruction (internal)
+    const brandLock = `Brand footer text must appear: "Advice อาทาระมอลล์ ศรีราชา".`;
+
+    // Compliance constraints
+    const constraints = `Constraints: no watermark, no extra brand logos, do not place Apple logo alone, no fake Apple signature artwork, keep background minimal and clean.`;
+
+    state.promptText =
+`Create a high-quality product image.
+Subject: ${productName} in ${state.selectedColor}, variant ${state.selectedVariant}.
+Composition: hero centered, ratio ${state.ratio}.
+Style/Tone: ${toneMap[state.tone]}. ${socialMap[state.social]}.
+${templateLine}
+Context: ${state.selectedTemplate === "lifestyle" ? "hands using the product naturally on a modern desk/café table" : "product on a clean minimalist surface with premium reflections"}.
+${promoLine}
+${priceLine}
+${brandLock}
+${constraints}
+Quality: sharp details, realistic materials, premium reflections, 4K, high-end product photography.`;
+
+    $("promptBox").textContent = state.promptText;
+  }
+
+  function seedProductSelect(list = PRODUCTS) {
+    const sel = $("productSelect");
+    sel.innerHTML = "";
+    list.forEach(p => {
+      const opt = document.createElement("option");
+      opt.value = p.id;
+      opt.textContent = p.name;
+      sel.appendChild(opt);
+    });
+    sel.value = state.selectedProductId;
+  }
+
+  function seedColorVariant() {
+    const product = PRODUCTS.find(p => p.id === state.selectedProductId);
+    $("colorSelect").innerHTML = product.colors.map(c => `<option>${c}</option>`).join("");
+    $("variantSelect").innerHTML = product.variants.map(v => `<option>${v}</option>`).join("");
+
+    // Keep selection if possible
+    state.selectedColor = product.colors.includes(state.selectedColor) ? state.selectedColor : product.colors[0];
+    state.selectedVariant = product.variants.includes(state.selectedVariant) ? state.selectedVariant : product.variants[0];
+    $("colorSelect").value = state.selectedColor;
+    $("variantSelect").value = state.selectedVariant;
+  }
+
+  // -----------------------------
+  // Init
+  // -----------------------------
+  setStep(1);
+  updateQuotaUI();
+  seedProductSelect();
+  seedColorVariant();
+
+  // Default ratio active
+  document.querySelectorAll(".ratioBtn").forEach(btn => {
+    if (btn.dataset.ratio === state.ratio) {
+      btn.classList.add("bg-slate-900","text-white","border-slate-900");
+    }
+  });
+
+  // -----------------------------
+  // Events
+  // -----------------------------
+  // Template selection
+  document.querySelectorAll(".tplCard").forEach(card => {
+    card.addEventListener("click", () => {
+      state.selectedTemplate = card.dataset.template;
+      $("selectedTemplateLabel").textContent = TEMPLATES[state.selectedTemplate].label;
+      // Simple visual feedback
+      document.querySelectorAll(".tplCard").forEach(c => c.classList.remove("ring-2","ring-slate-900"));
+      card.classList.add("ring-2","ring-slate-900");
+    });
+  });
+
+  // Step navigation
+  $("tab1").addEventListener("click", () => setStep(1));
+  $("tab2").addEventListener("click", () => setStep(2));
+  $("tab3").addEventListener("click", () => setStep(3));
+
+  $("goEditorBtn").addEventListener("click", () => {
+    if (!state.selectedTemplate) {
+      alert("กรุณาเลือก Template ก่อนครับ");
+      return;
+    }
+    setStep(2);
+  });
+
+  $("backToTemplatesBtn").addEventListener("click", () => setStep(1));
+  $("goOutputBtn").addEventListener("click", () => {
+    // If prompt empty, build once
+    if (!state.promptText) buildPrompt();
+    setStep(3);
+  });
+  $("backToEditorBtn").addEventListener("click", () => setStep(2));
+
+  // Reset
+  $("resetBtn").addEventListener("click", () => {
+    state.selectedTemplate = null;
+    $("selectedTemplateLabel").textContent = "ยังไม่ได้เลือก";
+    document.querySelectorAll(".tplCard").forEach(c => c.classList.remove("ring-2","ring-slate-900"));
+    state.promptText = "";
+    $("promptBox").textContent = "";
+    setStep(1);
+  });
+
+  // Product search filter
+  $("productSearch").addEventListener("input", (e) => {
+    const q = e.target.value.trim().toLowerCase();
+    const filtered = PRODUCTS.filter(p => p.name.toLowerCase().includes(q));
+    // If empty search, show all
+    seedProductSelect(filtered.length ? filtered : PRODUCTS);
+  });
+
+  // Product select
+  $("productSelect").addEventListener("change", (e) => {
+    state.selectedProductId = e.target.value;
+    seedColorVariant();
+  });
+
+  $("colorSelect").addEventListener("change", (e) => state.selectedColor = e.target.value);
+  $("variantSelect").addEventListener("change", (e) => state.selectedVariant = e.target.value);
+  $("toneSelect").addEventListener("change", (e) => state.tone = e.target.value);
+  $("socialSelect").addEventListener("change", (e) => state.social = e.target.value);
+
+  // Ratio buttons
+  document.querySelectorAll(".ratioBtn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      state.ratio = btn.dataset.ratio;
+      document.querySelectorAll(".ratioBtn").forEach(b => b.classList.remove("bg-slate-900","text-white","border-slate-900"));
+      btn.classList.add("bg-slate-900","text-white","border-slate-900");
+    });
+  });
+
+  // Promo checkboxes
+  document.querySelectorAll(".promoChk").forEach(chk => {
+    chk.addEventListener("change", () => {
+      state.promos = Array.from(document.querySelectorAll(".promoChk:checked")).map(x => x.value);
+    });
+  });
+
+  $("priceInput").addEventListener("input", (e) => state.price = e.target.value);
+
+  // Build prompt
+  $("buildPromptBtn").addEventListener("click", () => {
+    if (!state.selectedTemplate) {
+      alert("กรุณาเลือก Template ก่อน (หน้า 1) ครับ");
+      return;
+    }
+    buildPrompt();
+    alert("สร้าง Prompt แล้ว ✅ ไปหน้า Prompt ได้เลย");
+  });
+
+  // Copy
+  $("copyBtn").addEventListener("click", async () => {
+    if (!state.promptText) buildPrompt();
+    await navigator.clipboard.writeText(state.promptText);
+    $("copiedToast").classList.remove("hidden");
+    setTimeout(() => $("copiedToast").classList.add("hidden"), 1200);
+  });
+
+  // Use quota (demo)
+  $("useQuotaBtn").addEventListener("click", () => {
+    if (!state.promptText) buildPrompt();
+    if (usedQuota >= QUOTA_MAX) {
+      updateQuotaUI();
+      return;
+    }
+    usedQuota += 1;
+    localStorage.setItem(quotaStorageKey, String(usedQuota));
+    updateQuotaUI();
+  });
+
+  // New prompt
+  $("newPromptBtn").addEventListener("click", () => {
+    state.promptText = "";
+    $("promptBox").textContent = "";
+    setStep(1);
+  });
+</script>
 </body>
 </html>
