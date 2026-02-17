@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "brandLock": "Advice อาทาระมอลล์ ศรีราชา"
+  },
+  "categories": [
+    { "id": "promo", "name": "โปรโมชั่น", "icon": "🏷️", "count": 6 },
+    { "id": "festival", "name": "เทศกาล", "icon": "🎉", "count": 6 },
+    { "id": "launch", "name": "เปิดตัวสินค้า", "icon": "🚀", "count": 5 },
+    { "id": "lifestyle", "name": "Lifestyle", "icon": "🏡", "count": 6 },
+    { "id": "branch", "name": "โปรร้านเฉพาะสาขา", "icon": "📍", "count": 4 }
+  ],
+  "presets": [
+    { "id": "apple_clean", "name": "Apple Official Clean", "style": "clean Apple marketing layout, minimal typography, premium whitespace, crisp product lighting" },
+    { "id": "event_stage", "name": "Apple Event Stage", "style": "Apple keynote stage vibe, dark gradient background, subtle spotlight beam, elegant glow, high contrast" },
+    { "id": "minimal_white", "name": "Apple Minimal White", "style": "bright white studio background, soft shadow, minimal text area, ultra clean composition" },
+    { "id": "dark_lux", "name": "Dark Luxury Studio", "style": "cinematic dark studio, rim light, glossy reflections, premium luxury mood, subtle particles" },
+    { "id": "tiktok_neon", "name": "TikTok Neon Promo", "style": "dynamic neon accent lights, punchy contrast, energetic composition, modern social ad vibe" }
+  ],
+  "templates": [
+    {
+      "id": "promo_installment_0",
+      "category": "promo",
+      "title": "ผ่อน 0% (ชัดมาก)",
+      "defaultMood": "Minimal",
+      "prompt": "Create a {style} promotional poster for {product}. Promotion: \"{promoText}\". Store: {store}. Contact: {contact}. Layout: product centered with soft shadow, clean headline space on top, small CTA space at bottom. Mood: {mood}. Aspect ratio: {ratio}. Ultra realistic studio lighting, Apple marketing aesthetic, high detail, sharp typography spacing."
+    },
+    {
+      "id": "festival_cny_luxury",
+      "category": "festival",
+      "title": "ตรุษจีน Luxury",
+      "defaultMood": "Luxury",
+      "prompt": "Create a high-end promotional poster for {product}. Theme: Chinese New Year. Style: {style}, soft red gradient background, subtle gold light particles, premium elegant composition. Product centered with soft shadow. Reserve clean text space for headline and promo. Promotion: {promoText}. Store: {store}. Contact: {contact}. Aspect ratio: {ratio}. Mood: {mood}. Ultra realistic product lighting, studio render quality."
+    },
+    {
+      "id": "launch_new_color",
+      "category": "launch",
+      "title": "เปิดตัวสีใหม่ (เรียบหรู)",
+      "defaultMood": "Luxury",
+      "prompt": "Create an Apple-style product launch poster for {product}. Focus: new color announcement. Style: {style}. Background: subtle gradient that matches the product color palette. Composition: product large center, minimal headline area, clean small specs area. Store: {store}. Contact: {contact}. Aspect ratio: {ratio}. Mood: {mood}. Ultra realistic lighting, premium minimal layout."
+    },
+    {
+      "id": "lifestyle_student",
+      "category": "lifestyle",
+      "title": "นักเรียน/นักศึกษา (น่าใช้)",
+      "defaultMood": "Cute",
+      "prompt": "Create a friendly lifestyle promo poster for {product} for students. Style: {style}. Mood: {mood}. Scene: bright clean desk, notebooks, soft daylight, modern minimal. Keep the product as hero object. Promotion: {promoText}. Store: {store}. Contact: {contact}. Aspect ratio: {ratio}. High detail, realistic lighting, clear space for headline."
+    },
+    {
+      "id": "branch_near_hospital",
+      "category": "branch",
+      "title": "ใกล้โรงพยาบาล (เร่งด่วน/ไว้ใจได้)",
+      "defaultMood": "Trustworthy",
+      "prompt": "Create a trustworthy local branch promotional poster for {product}. Context: branch near a hospital area, tone is calm and reliable. Style: {style}. Promotion: {promoText}. Store: {store}. Contact: {contact}. Aspect ratio: {ratio}. Mood: {mood}. Clean layout, high readability, premium product lighting."
+    }
+  ]
+}
