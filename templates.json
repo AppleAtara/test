@@ -1,8 +1,9 @@
 {
   "meta": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "brandLock": "Advice อาทาระมอลล์ ศรีราชา",
-    "freeQuotaPerDay": 3
+    "freeQuotaPerDay": 30,
+    "proLabel": "Pro 99 บาท/เดือน"
   },
   "rows": [
     { "id": "promo", "title": "หมวด โปรโมชั่น", "icon": "🏷️" },
@@ -11,6 +12,13 @@
     { "id": "lifestyle", "title": "หมวด Lifestyle", "icon": "🏡" },
     { "id": "branch", "title": "หมวด โปรร้านเฉพาะสาขา", "icon": "📍" }
   ],
+  "campaignThemes": {
+    "spotlight": { "icon": "⭐", "name": "Product Spotlight", "desc": "เน้นสินค้าเด่น + ความคุ้ม" },
+    "tips": { "icon": "💡", "name": "Tips & Tricks", "desc": "ทิปใช้งานสั้นๆ เข้าใจง่าย" },
+    "compare": { "icon": "⚡", "name": "Comparison", "desc": "เปรียบเทียบรุ่น/ความคุ้ม" },
+    "promo": { "icon": "🔥", "name": "Promotion Day", "desc": "โปรแรง/Flash sale" },
+    "lifestyle": { "icon": "🎯", "name": "Lifestyle", "desc": "ไลฟ์สไตล์กับ Apple" }
+  },
   "presets": [
     { "id": "apple_clean", "name": "Apple Official Clean", "style": "clean Apple marketing layout, premium whitespace, minimal typography, crisp product lighting" },
     { "id": "event_stage", "name": "Apple Event Stage", "style": "Apple keynote stage vibe, dark gradient background, spotlight beam, elegant glow, high contrast" },
