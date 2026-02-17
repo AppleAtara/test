@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Apple Social Prompt Studio</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body class="bg-white text-slate-900">
+  <div class="app-container">
+    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur border-b border-slate-200">
+      <div class="px-4 py-3 flex items-center gap-3">
+        <button id="btnBack"
+          class="hidden h-10 w-10 rounded-xl border border-slate-200 bg-white active:scale-[0.99]"
+          aria-label="ย้อนกลับ">←</button>
+
+        <div class="flex-1">
+          <div class="text-base font-semibold leading-tight">Apple Social Prompt Studio</div>
+          <div class="text-xs text-slate-500">Prompt CMS สำหรับพนักงานขาย • ฟรี</div>
+        </div>
+
+        <div class="text-xs text-slate-600 text-right">
+          <div class="flex items-center justify-end gap-2">
+            <span id="quotaLabel">-</span>
+
+            <label class="inline-flex items-center gap-2 select-none">
+              <span class="text-[11px] text-slate-500">ไม่จำกัด</span>
+              <input id="toggleUnlimited" type="checkbox" class="sr-only" />
+              <span id="togglePill" class="w-11 h-6 rounded-full bg-slate-200 relative transition">
+                <span id="toggleDot" class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white border border-slate-200 transition"></span>
+              </span>
+            </label>
+          </div>
+          <div class="text-[11px] text-slate-500">โหมดใช้ฟรี</div>
+        </div>
+      </div>
+
+      <div class="px-4 pb-3">
+        <input id="searchInput" type="search" placeholder="ค้นหาเทมเพลต เช่น iPhone, ผ่อน 0%, เปิดตัว…"
+          class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-slate-300" />
+      </div>
+    </header>
+
+    <main id="appRoot" class="px-4 py-4 pb-28">
+      กำลังโหลด…
+    </main>
+
+    <footer class="fixed bottom-0 left-0 right-0 z-40">
+      <div class="mx-auto max-w-[512px] px-4 pb-4">
+        <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-3 flex items-center gap-2">
+          <button id="btnFreeUse"
+            class="flex-1 rounded-2xl bg-slate-900 text-white py-3 text-sm font-semibold active:scale-[0.99]">
+            ใช้โควต้าฟรี
+          </button>
+          <button id="btnCopy"
+            class="w-28 rounded-2xl bg-white border border-slate-200 py-3 text-sm font-semibold active:scale-[0.99]">
+            Copy
+          </button>
+        </div>
+        <div id="toast" class="hidden mt-2 text-center text-xs text-white bg-slate-900 rounded-xl py-2">
+          คัดลอกแล้ว ✅
+        </div>
+      </div>
+    </footer>
+
+    <textarea id="clipboardProxy" class="sr-only" aria-hidden="true"></textarea>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>

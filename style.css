@@ -1,0 +1,4 @@
+:root { --app-max: 512px; }
+* { font-family: "Kanit", system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+.app-container { max-width: var(--app-max); margin: 0 auto; min-height: 100vh; }
+button, a { -webkit-tap-highlight-color: transparent; }

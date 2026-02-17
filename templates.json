@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "brandLock": "Advice อาทาระมอลล์ ศรีราชา",
+    "freeQuotaPerDay": 3
+  },
+  "rows": [
+    { "id": "promo", "title": "หมวด โปรโมชั่น", "icon": "🏷️" },
+    { "id": "festival", "title": "หมวด เทศกาล", "icon": "🎉" },
+    { "id": "launch", "title": "หมวด เปิดตัวสินค้า", "icon": "🚀" },
+    { "id": "lifestyle", "title": "หมวด Lifestyle", "icon": "🏡" },
+    { "id": "branch", "title": "หมวด โปรร้านเฉพาะสาขา", "icon": "📍" }
+  ],
+  "presets": [
+    { "id": "apple_clean", "name": "Apple Official Clean", "style": "clean Apple marketing layout, premium whitespace, minimal typography, crisp product lighting" },
+    { "id": "event_stage", "name": "Apple Event Stage", "style": "Apple keynote stage vibe, dark gradient background, spotlight beam, elegant glow, high contrast" },
+    { "id": "minimal_white", "name": "Apple Minimal White", "style": "bright white studio background, soft shadow, ultra clean composition, minimal text area" },
+    { "id": "dark_lux", "name": "Dark Luxury Studio", "style": "cinematic dark studio, rim light, glossy reflections, premium luxury mood" },
+    { "id": "tiktok_neon", "name": "TikTok Neon Promo", "style": "dynamic neon accents, punchy contrast, energetic composition, modern social ad vibe" }
+  ],
+  "dropdowns": {
+    "products": [
+      "iPhone 17",
+      "iPhone 17 Pro",
+      "iPhone 17 Pro Max",
+      "iPad Pro M5",
+      "iPad Air",
+      "MacBook Air M4",
+      "MacBook Pro",
+      "Apple Watch Series",
+      "Apple Watch Ultra"
+    ],
+    "moods": ["Luxury", "Minimal", "Dynamic", "Cute", "Trustworthy"],
+    "ratios": ["1:1", "4:5", "16:9"],
+    "festivals": ["None", "Chinese New Year", "Valentine", "Songkran", "Mother's Day", "Christmas", "New Year"],
+    "promoTypes": ["Flash Sale", "ผ่อน 0%", "ซื้อคู่คุ้มกว่า", "ของแถม Limited", "เทิร์นเครื่องเก่า"]
+  },
+  "templates": [
+    {
+      "id": "promo_0percent",
+      "row": "promo",
+      "title": "ผ่อน 0% (Apple Clean)",
+      "thumb": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=60",
+      "basePrompt": "Create a {style} promotional poster for {product}. Promotion: \"{promoText}\". Store: {store}. Contact: {contact}. Layout: product centered with soft shadow, clean headline space on top, CTA space at bottom. Mood: {mood}. Aspect ratio: {ratio}. Ultra realistic studio lighting, Apple marketing aesthetic, high detail."
+    },
+    {
+      "id": "festival_cny",
+      "row": "festival",
+      "title": "ตรุษจีน Luxury (แดงทองพรีเมียม)",
+      "thumb": "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?w=800&q=60",
+      "basePrompt": "Create a high-end promotional poster for {product}. Theme: Chinese New Year. Style: {style}, soft red gradient background, subtle gold particles. Product centered with soft shadow. Reserve text space for headline and promo. Promotion: {promoText}. Store: {store}. Contact: {contact}. Aspect ratio: {ratio}. Mood: {mood}. Ultra realistic product lighting."
+    },
+    {
+      "id": "launch_newiphone",
+      "row": "launch",
+      "title": "เปิดตัว iPhone ใหม่ (Event Stage)",
+      "thumb": "https://images.unsplash.com/photo-1510552776732-03e61cf4b144?w=800&q=60",
+      "basePrompt": "Create an Apple-style product launch poster for {product}. Focus: NEW launch announcement. Style: {style}. Composition: large hero product center, minimal headline, clean spec area. Store: {store}. Contact: {contact}. Aspect ratio: {ratio}. Mood: {mood}. Ultra realistic lighting, premium minimal layout."
+    },
+    {
+      "id": "lifestyle_creator",
+      "row": "lifestyle",
+      "title": "Lifestyle Creator (โต๊ะทำงาน/ครีเอเตอร์)",
+      "thumb": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&q=60",
+      "basePrompt": "Create a lifestyle promotional poster for {product} for creators. Style: {style}. Scene: modern clean desk, soft daylight, minimal props. Keep product as hero object. Promotion: {promoText}. Store: {store}. Contact: {contact}. Aspect ratio: {ratio}. Mood: {mood}. High detail, realistic lighting, clear headline space."
+    },
+    {
+      "id": "branch_mall",
+      "row": "branch",
+      "title": "โปรสาขาห้าง (เน้นแผนที่/พิกัด)",
+      "thumb": "https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?w=800&q=60",
+      "basePrompt": "Create a local branch promotional poster for {product}. Context: branch in a shopping mall. Style: {style}. Promotion: {promoText}. Include clean space for map pin and location line. Store: {store}. Contact: {contact}. Aspect ratio: {ratio}. Mood: {mood}. Clean layout, high readability, premium product lighting."
+    }
+  ]
+}
